@@ -79,47 +79,32 @@ $(".list-group").on("click", "p", function(){
   textInput.trigger("focus");
 });
 
-// due date was clicked
+// due date was clicked / EDIT CREATED TASK DATE
 $(".list-group").on("click", "span", function(){
-  $(".list-group").on("blur", "input[type='text']", function(){
+
     // get the current text
     var date = $(this)
-    .val()
+    .text()
     .trim();
     
-    //get the parent ul's id attribute
-    var status = $(this)
-    .closest(".list-group")
-    .attr("id")
-    .replace("list-", "");
-    // get the task's position in the list of other li elements
-    var index = $(this)
-    .closest(".list-group-item")
-    .index();
-    //update task in array and re-save to local storage
-    tasks[status][index].date = date;
-    saveTasks();
-    // recreate span element with bootstrap classes
-    var taskSpan = $("<span>")
-    .addClass("badge badge-primary badge-pill")
-    .text(date);
-    //replace input with span element
-    $(this).replaceWith(taskSpan);
+  //create new input element 
+    var dateInput = $("<input>").attr("type", "text").addClass("form-control").val(date);
+
+    $(this).replaceWith(dateInput);
+
+    //enable jquery ui datepicker
+    dateInput.datepicker({
+      minDate: 0,
+      onClose: function(){
+        //when calendar is closed, force a "change" event on the 'dateInput'
+        $(this).trigger("change");
+      }
+    });
+
+      //automatically bring up the calendar
+      dateInput.trigger("focus");
   });
-  //get current text
-  var date = $(this)
-  .text()
-  .trim();
-//create new input element
-  var dateInput = $("<input>")
-  .attr("type", "text")
-  .addClass("form-control")
-  .val(date);
-//swap out elements
-$(this).replaceWith(dateInput);
-//automatically focus on new element
-dateInput.trigger("focus");
-}) ;
+
 
 
 
@@ -156,10 +141,14 @@ $("#task-form-modal .btn-primary").click(function() {
     saveTasks();
   }
 });
+
 // JQuery Date Picker for modal
 $("#modalDueDate").datepicker({
   minDate: 0
 });
+//JQuery Date Picker For Edit Tasks
+
+
 //Drag and Drop
 $(".card .list-group").sortable({
   connectWith: $(".card .list-group"),
