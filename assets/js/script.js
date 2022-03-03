@@ -156,6 +156,10 @@ $("#task-form-modal .btn-primary").click(function() {
     saveTasks();
   }
 });
+// JQuery Date Picker for modal
+$("#modalDueDate").datepicker({
+  minDate: 0
+});
 //Drag and Drop
 $(".card .list-group").sortable({
   connectWith: $(".card .list-group"),
