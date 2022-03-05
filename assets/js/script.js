@@ -186,18 +186,22 @@ $(".card .list-group").sortable({
   activate: function(event){
     console.log("activate", this);
     $(this).addClass("dropover");
+    $(".bottom-trash").addClass("bottom-trash-drag");
   },
   deactivate: function(event){
     console.log("deactivate", this);
     $(this).removeClass("dropover");
+    $(".bottom-trash").removeClass("bottom-trash-drag");
   },
   over: function(event){
     console.log("over", this);
     $(event.target).addClass("dropover-active");
+    $(".bottom-trash").addClass("bottom-trash-active");
   },
   out: function(event){
     console.log("out", this);
     $(event.target).removeClass("dropover-active")
+    $(".bottom-trash").removeClass("bottom-trash-active");
   },
   update: function(event){
     //create array to store the task data in
