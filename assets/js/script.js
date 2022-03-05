@@ -185,15 +185,19 @@ $(".card .list-group").sortable({
   helper: "clone",
   activate: function(event){
     console.log("activate", this);
+    $(this).addClass("dropover");
   },
   deactivate: function(event){
     console.log("deactivate", this);
+    $(this).removeClass("dropover");
   },
   over: function(event){
     console.log("over", this);
+    $(event.target).addClass("dropover-active");
   },
   out: function(event){
     console.log("out", this);
+    $(event.target).removeClass("dropover-active")
   },
   update: function(event){
     //create array to store the task data in
